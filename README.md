@@ -1,19 +1,18 @@
-# Kartik Kalwadia — 3D Video Editor Portfolio
+# Kartik Kalwadia — Video Editor & AI Creative Portfolio
 
-A portrait-led, animated black-and-blue portfolio with a Three.js hero scene, two featured reference projects, editing services, software toolbox, AI-video/prompting section and responsive layout.
+A premium dark editorial portfolio with a restrained 3D perspective grid, animated scan detail, a prominent profile portrait, two directly embedded MP4 samples, services, toolkit and contact links.
 
-## Featured reference videos
-The two supplied reference clips are represented by visual thumbnails:
-- Project 01 — Atmosphere in Motion (15.9 seconds)
-- Project 02 — Product, Elevated (39.9 seconds)
+## Featured videos
+Both video files are stored in the repository and play directly in the page using native HTML video controls. No Google Drive links are used.
 
-To enable full playback inside the project modal, share each clip from Google Drive using **Anyone with the link → Viewer**, then provide both links so they can be added to `script.js`.
+- `assets/videos/project-01-cinematic.mp4` — cinematic / hospitality reference edit.
+- `assets/videos/project-02-product.mp4` — product / promotional reference edit.
 
-## Add more projects
-Add a poster image to `assets/images/`, add the MP4 to a video host, then add a project card and its shareable preview URL to `index.html` and `script.js`.
+The source videos were optimized for fast web playback. The two projects are deliberately presented as a curated selection rather than an exhaustive archive. Keep both MP4 files in `assets/videos/` when deploying; the players reference these repository paths directly.
 
-## Personalize contact
-In `index.html`, replace `your.email@example.com`, the Instagram URL and the WhatsApp URL with your actual contact details.
+## Personal details
+Phone / WhatsApp: +91 60011 42217  
+Email: kartikkalwadia3@gmail.com
 
 ## GitHub Pages
-Repository → Settings → Pages → Build and deployment → Source → GitHub Actions. The workflow in `.github/workflows/pages.yml` publishes each push to `main`.
+Repository Settings → Pages → Source: GitHub Actions. The workflow in `.github/workflows/pages.yml` deploys the static website on pushes to `main`.

@@ -1,129 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050914">
-  <meta name="description" content="Kartik Kalwadia — Video Editor, Motion Creator and AI Video Creative. Cinematic edits, promotional videos, sound design, captions and AI video production.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d14">
+  <meta name="description" content="Kartik Kalwadia — video editor and AI creative. Selected cinematic edits, creator content, brand promos, sound design, captions and AI-assisted video production.">
   <title>Kartik Kalwadia — Video Editor & AI Creative</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <header class="nav">
-    <a class="brand" href="#home"><span class="brand-mark">K<span>.</span></span><span>KARTIK <span class="muted">/ VISUALS</span></span></a>
-    <nav><a href="#work">WORK</a><a href="#services">WHAT I DO</a><a href="#toolbox">TOOLBOX</a><a href="#contact">CONTACT</a></nav>
-    <a class="nav-cta" href="#contact">LET'S CREATE <span>↗</span></a>
-    <button class="menu" aria-label="Open menu">☰</button>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Kartik Kalwadia home">KK<span>.</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#about">About</a><a href="#work">Selected work</a><a href="#expertise">Expertise</a><a href="#toolkit">Toolkit</a>
+    </nav>
+    <a class="header-contact" href="#contact">LET'S TALK <span>↗</span></a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
   </header>
-
   <main>
-    <section class="hero" id="home">
-      <canvas id="scene3d" aria-hidden="true"></canvas>
-      <div class="hero-grid"></div>
-      <div class="hero-topline"><span><i></i> INDEPENDENT VIDEO EDITOR & AI CREATIVE</span><span>GUWAHATI · INDIA</span></div>
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="depthGrid" aria-hidden="true"></canvas><div class="hero-vignette" aria-hidden="true"></div>
+      <div class="hero-kicker"><span class="status-dot"></span> INDEPENDENT VIDEO EDITOR <span class="kicker-divider">/</span> AI CREATIVE</div>
       <div class="hero-layout">
         <div class="hero-copy reveal">
-          <p class="pre-title">HEY, I'M KARTIK KALWADIA</p>
-          <h1>YOUR VISION.<br><span class="outline">MY</span> <span class="blue">TIMELINE.</span></h1>
-          <p class="hero-desc">I turn raw footage and big ideas into cinematic edits, scroll-stopping reels, brand promos and AI-powered visuals.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#work">EXPLORE MY WORK <span>↘</span></a>
-            <a class="text-link" href="#contact">LET'S TALK <span>↗</span></a>
-          </div>
-          <div class="hero-tags"><span>VIDEO EDITING</span><b>✳</b><span>MOTION & SOUND</span><b>✳</b><span>AI VIDEO</span></div>
+          <p class="eyebrow">KARTIK KALWADIA <span>— PORTFOLIO 2026</span></p>
+          <h1 id="hero-title">I MAKE<br><span class="title-outline">VIDEOS</span><br> <span class="title-blue">MEAN MORE.</span></h1>
+          <p class="hero-intro">Thoughtful edits. Precise sound. Captions that land. Visuals with a point of view. I turn raw footage and bold ideas into stories people want to watch.</p>
+          <div class="hero-ctas"><a class="button button-primary" href="#work">VIEW SELECTED WORK <span>↘</span></a><a class="inline-link" href="#contact">START A PROJECT <span>↗</span></a></div>
+          <div class="hero-capabilities"><span>SHORT-FORM</span><i></i><span>BRAND FILMS</span><i></i><span>AI VIDEO</span></div>
         </div>
-        <div class="portrait-stage reveal" id="portraitStage">
-          <div class="portrait-orbit orbit-one"></div><div class="portrait-orbit orbit-two"></div>
-          <div class="portrait-frame">
-            <div class="portrait-topline"><span>KK / CREATIVE PROFILE</span><span>01 — 04</span></div>
-            <img src="assets/images/kartik-profile.webp" alt="Kartik Kalwadia portrait" class="portrait">
-            <div class="portrait-bottom"><span>KARTIK KALWADIA</span><span>VISUAL STORYTELLER</span></div>
+        <div class="hero-portrait-wrap reveal">
+          <div class="portrait-index">PORTRAIT STUDY <span>01 / KK</span></div>
+          <div class="portrait-frame" data-tilt>
+            <div class="portrait-scan"></div>
+            <img src="assets/images/kartik-profile.webp" alt="Kartik Kalwadia" class="portrait-image" fetchpriority="high">
+            <div class="portrait-frame-corner corner-tl"></div><div class="portrait-frame-corner corner-br"></div>
+            <div class="portrait-caption"><span>KARTIK<br>KALWADIA</span><span>EDITOR<br>& CREATIVE</span></div>
           </div>
-          <div class="float-chip chip-top"><span class="chip-dot"></span> EDIT. CREATE. REPEAT.</div>
-          <div class="float-chip chip-bottom"><span>3D / AI</span><strong>CREATIVE MODE <em>ON</em></strong></div>
-          <span class="portrait-cross">✳</span>
+          <div class="portrait-orbit orbit-a"></div><div class="portrait-orbit orbit-b"></div>
+          <div class="floating-index">KK <span>///</span> 26</div><div class="scan-cross">+</div>
         </div>
       </div>
-      <div class="hero-bottom"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span>01 / 04</span></div>
+      <div class="hero-footer"><span>GUWAHATI, INDIA</span><span class="hero-rule"></span><a href="#about">SCROLL TO DISCOVER <b>↓</b></a><span>00 — 04</span></div>
     </section>
-
-    <section class="ticker"><div>MAKE EVERY FRAME COUNT <b>✳</b> EDIT WITH INTENTION <b>✳</b> CREATE WITH IMPACT <b>✳</b> MAKE EVERY FRAME COUNT <b>✳</b> EDIT WITH INTENTION <b>✳</b></div></section>
-
-    <section class="work section" id="work">
-      <div class="section-head reveal"><div><p class="eyebrow"><i></i> SELECTED WORK / REFERENCE PROJECTS</p><h2>THE <span class="blue">SHOWCASE.</span></h2></div><p class="section-intro">Two recent reference edits, shown as featured projects.<br>Tap a card to watch the full video once its Drive link is connected.</p></div>
+    <section class="intro-band" id="about">
+      <div class="section-label"><span>01</span> A LITTLE ABOUT MY APPROACH</div>
+      <div class="intro-content reveal">
+        <h2>Editing is more than cutting clips.<br><em>It's finding the feeling</em> in every frame.</h2>
+        <div class="intro-side"><p>I'm Kartik — a video editor and AI creative focused on the details that make a video work: pacing, sound, visual flow, captions and a strong opening.</p><p>I work across creator content, cinematic edits and promotional videos, using desktop, mobile and AI-assisted workflows to bring an idea together.</p></div>
+      </div>
+    </section>
+    <section class="work-section section-pad" id="work">
+      <div class="section-heading reveal"><div><div class="section-label"><span>02</span> A CURATED SELECTION</div><h2>Selected <em>work.</em></h2></div><p class="heading-note">Two projects. Two different moods.<br>Both selected to show how I approach a story.</p></div>
       <div class="project-grid">
-        <article class="project-card reveal" data-tilt>
-          <div class="project-image">
-            <img src="assets/images/reference-01.webp" alt="Cinematic cafe and hospitality video reference" loading="lazy">
-            <div class="image-shade"></div><span class="project-index">PROJECT / 01</span><span class="project-duration">00:16</span>
-            <button class="play-project" data-project="one" aria-label="Open project one">▶</button>
-            <span class="project-caption">CINEMATIC / BRAND STORY</span>
-          </div>
-          <div class="project-info"><div><span class="project-type">HOSPITALITY · CINEMATIC REEL</span><h3>Atmosphere in Motion</h3><p>Visual storytelling · rhythm · music-led editing</p></div><span class="project-arrow">↗</span></div>
+        <article class="project-card project-tall reveal">
+          <div class="project-meta"><span>PROJECT 01</span><span>CINEMATIC / HOSPITALITY</span></div>
+          <div class="video-shell video-portrait"><video controls playsinline preload="metadata" poster="assets/images/reference-01.webp"><source src="assets/videos/project-01-cinematic.mp4" type="video/mp4">Your browser does not support HTML video.</video><span class="video-index">01</span></div>
+          <div class="project-details"><div><h3>Atmosphere in motion</h3><p>A mood-led cinematic edit built around atmosphere, detail and rhythm.</p></div><span class="project-arrow">↗</span></div>
+          <div class="project-tags"><span>VISUAL STORYTELLING</span><span>MUSIC SYNC</span><span>PACE & FLOW</span></div>
         </article>
-        <article class="project-card reveal" data-tilt>
-          <div class="project-image">
-            <img src="assets/images/reference-02.webp" alt="Product promotion video reference" loading="lazy">
-            <div class="image-shade"></div><span class="project-index">PROJECT / 02</span><span class="project-duration">00:40</span>
-            <button class="play-project" data-project="two" aria-label="Open project two">▶</button>
-            <span class="project-caption">PRODUCT / PROMOTIONAL AD</span>
-          </div>
-          <div class="project-info"><div><span class="project-type">PRODUCT · PROMO EDIT</span><h3>Product, Elevated</h3><p>Product focus · pacing · promotional storytelling</p></div><span class="project-arrow">↗</span></div>
+        <article class="project-card project-square reveal">
+          <div class="project-meta"><span>PROJECT 02</span><span>PRODUCT / PROMOTION</span></div>
+          <div class="video-shell video-square"><video controls playsinline preload="metadata" poster="assets/images/reference-02.webp"><source src="assets/videos/project-02-product.mp4" type="video/mp4">Your browser does not support HTML video.</video><span class="video-index">02</span></div>
+          <div class="project-details"><div><h3>Product, in focus</h3><p>A promotional product edit with clear visual emphasis and a direct message.</p></div><span class="project-arrow">↗</span></div>
+          <div class="project-tags"><span>PRODUCT EDIT</span><span>CAPTIONS</span><span>SOUND DESIGN</span></div>
         </article>
       </div>
-      <p class="work-note"><span class="note-dot"></span> THESE ARE YOUR TWO FEATURED REFERENCE PROJECTS · MORE WORK CAN BE ADDED ANYTIME</p>
+      <div class="curation-note reveal"><span class="curation-mark">✳</span><p><strong>A considered selection, not the full archive.</strong> I have worked on a wider range of creator and brand videos. I keep this portfolio focused on a small number of projects that best represent the kind of editing I want to show.</p></div>
     </section>
-
-    <section class="services section" id="services">
-      <div class="section-head reveal"><div><p class="eyebrow"><i></i> MY CREATIVE RANGE</p><h2>WHAT I <span class="blue">CREATE.</span></h2></div><p class="section-intro">From the first idea to the final export,<br>I can help shape the whole video experience.</p></div>
-      <div class="service-grid">
-        <article class="service-card reveal" data-tilt><span class="service-no">01 / EDIT</span><div class="service-icon">◫</div><h3>Video Editing</h3><p>Reels, Shorts, YouTube videos, cinematic edits, event films, brand promos and ad creatives.</p><div class="service-tags"><span>SHORT FORM</span><span>LONG FORM</span><span>ADS</span></div></article>
-        <article class="service-card reveal" data-tilt><span class="service-no">02 / SOUND</span><div class="service-icon">⌁</div><h3>Sound & Captions</h3><p>Sound effects, music sync, audio cleanup, subtitles, animated captions and engaging text overlays.</p><div class="service-tags"><span>SFX</span><span>SYNC</span><span>SUBTITLES</span></div></article>
-        <article class="service-card reveal" data-tilt><span class="service-no">03 / MOTION</span><div class="service-icon">✳</div><h3>Motion & Finishing</h3><p>Transitions, motion graphics, colour correction, colour grading, visual effects and final polish.</p><div class="service-tags"><span>MOTION</span><span>COLOUR</span><span>VFX</span></div></article>
-        <article class="service-card ai-card reveal" data-tilt><span class="service-no">04 / AI STUDIO</span><div class="service-icon">⌘</div><h3>AI Video & Prompting</h3><p>AI-generated video concepts, image-to-video workflows, creative prompt writing and AI-assisted production.</p><div class="service-tags"><span>AI VIDEO</span><span>PROMPTING</span><span>CONCEPTS</span></div></article>
+    <section class="expertise-section section-pad" id="expertise">
+      <div class="section-heading reveal"><div><div class="section-label"><span>03</span> WHAT I BRING TO THE TIMELINE</div><h2>More than<br><em>the edit.</em></h2></div><p class="heading-note">From the first hook to the final export,<br>I look after the full viewing experience.</p></div>
+      <div class="expertise-list">
+        <article class="expertise-row reveal"><span class="expertise-num">01</span><div class="expertise-title"><h3>Video editing</h3><p>Short-form reels · YouTube · cinematic cuts · brand promos</p></div><div class="expertise-desc">A strong opening, clean pacing, intentional cuts and a clear story from start to finish.</div><span class="expertise-symbol">↗</span></article>
+        <article class="expertise-row reveal"><span class="expertise-num">02</span><div class="expertise-title"><h3>Sound & captions</h3><p>Sound effects · music sync · subtitles · kinetic captions</p></div><div class="expertise-desc">The small details that make an edit feel complete — layered sound, timing and readable text.</div><span class="expertise-symbol">↗</span></article>
+        <article class="expertise-row reveal"><span class="expertise-num">03</span><div class="expertise-title"><h3>Motion & finishing</h3><p>Transitions · motion graphics · colour · visual polish</p></div><div class="expertise-desc">Subtle movement, balanced colour and finishing touches that support the message instead of distracting from it.</div><span class="expertise-symbol">↗</span></article>
+        <article class="expertise-row reveal"><span class="expertise-num">04</span><div class="expertise-title"><h3>AI video & prompting</h3><p>AI concepts · prompt writing · image-to-video · creative workflows</p></div><div class="expertise-desc">Using AI tools to explore ideas, create visual directions and speed up the path from concept to screen.</div><span class="expertise-symbol">↗</span></article>
       </div>
     </section>
-
-    <section class="toolbox section" id="toolbox">
-      <div class="section-head reveal"><div><p class="eyebrow"><i></i> DESKTOP · MOBILE · AI</p><h2>MY CREATIVE <span class="blue">TOOLBOX.</span></h2></div><p class="section-intro">A flexible workflow across mobile and PC,<br>with editing apps and AI creative tools.</p></div>
-      <div class="toolbox-panel reveal">
-        <div class="tool-category"><div class="tool-heading"><span>01</span><div><h3>Desktop Editing</h3><p>Professional editing, grading and compositing</p></div><b>PC / MAC</b></div><div class="tool-list"><span>CapCut Desktop</span><span>Adobe Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span><span>Final Cut Pro</span><span>Filmora</span><span>Vegas Pro</span><span>Adobe Audition</span></div></div>
-        <div class="tool-category"><div class="tool-heading"><span>02</span><div><h3>Mobile Editing</h3><p>Fast, flexible edits made for mobile-first content</p></div><b>ANDROID / IOS</b></div><div class="tool-list"><span>CapCut Mobile</span><span>VN Video Editor</span><span>Alight Motion</span><span>KineMaster</span><span>InShot</span><span>PowerDirector</span><span>LumaFusion</span><span>Node Video</span></div></div>
-        <div class="tool-category"><div class="tool-heading"><span>03</span><div><h3>AI Creative Tools</h3><p>Generative video, creative exploration and prompt workflows</p></div><b>AI WORKFLOW</b></div><div class="tool-list ai-tools"><span>Runway</span><span>Kling AI</span><span>PixVerse</span><span>Pika</span><span>Luma AI</span><span>Google Veo</span><span>Sora</span><span>HeyGen</span><span>AI Prompt Engineering</span></div></div>
+    <section class="toolkit-section section-pad" id="toolkit">
+      <div class="section-heading reveal"><div><div class="section-label"><span>04</span> MY CREATIVE TOOLKIT</div><h2>Tools are the craft.<br><em>The idea comes first.</em></h2></div><p class="heading-note">Desktop, mobile and AI-assisted tools<br>for different stages of production.</p></div>
+      <div class="toolkit-grid">
+        <div class="tool-panel reveal"><div class="tool-panel-head"><span>01 / DESKTOP</span><b>EDIT + FINISH</b></div><h3>Desktop editing</h3><div class="tool-chips"><span>Adobe Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span><span>CapCut Desktop</span><span>Final Cut Pro</span><span>Filmora</span><span>Adobe Audition</span></div></div>
+        <div class="tool-panel reveal"><div class="tool-panel-head"><span>02 / MOBILE</span><b>CREATE ON THE MOVE</b></div><h3>Mobile editing</h3><div class="tool-chips"><span>CapCut</span><span>VN</span><span>Alight Motion</span><span>KineMaster</span><span>InShot</span><span>Node Video</span><span>LumaFusion</span></div></div>
+        <div class="tool-panel tool-panel-ai reveal"><div class="tool-panel-head"><span>03 / AI WORKFLOW</span><b>IDEA → GENERATION</b></div><h3>AI & prompting</h3><div class="tool-chips"><span>Google Gemini</span><span>PixVerse</span><span>Claude</span><span>Qwen</span><span>Prompt engineering</span><span>AI video concepts</span><span>Image-to-video</span></div></div>
       </div>
-      <p class="toolbox-foot">TOOLS ARE PART OF THE PROCESS. THE STORY IS ALWAYS THE MAIN THING.</p>
+      <p class="toolkit-foot">I stay curious, test new tools and choose the workflow that best serves each project.</p>
     </section>
-
-    <section class="process section">
-      <div class="section-head reveal"><div><p class="eyebrow"><i></i> HOW I WORK</p><h2>IDEA TO <span class="blue">IMPACT.</span></h2></div><p class="section-intro">A simple, creative workflow that keeps<br>the story and the final result in focus.</p></div>
-      <div class="process-grid">
-        <div class="process-step reveal"><span>01</span><h3>Understand</h3><p>Goal, audience, reference and the message you want to deliver.</p></div>
-        <div class="process-step reveal"><span>02</span><h3>Build</h3><p>Plan the edit, visual direction, footage, music and AI prompts.</p></div>
-        <div class="process-step reveal"><span>03</span><h3>Polish</h3><p>Fine cuts, sound effects, captions, colour and motion details.</p></div>
-        <div class="process-step reveal"><span>04</span><h3>Deliver</h3><p>Export in the right format, aspect ratio and platform-ready quality.</p></div>
+    <section class="process-section section-pad">
+      <div class="process-top reveal"><div class="section-label"><span>05</span> THE WAY I WORK</div><h2>Clear process.<br><em>Stronger result.</em></h2></div>
+      <div class="process-steps">
+        <div class="process-step reveal"><span>01</span><h3>Understand</h3><p>The goal, audience, reference and message.</p></div>
+        <div class="process-step reveal"><span>02</span><h3>Shape</h3><p>Structure, hook, footage, music and direction.</p></div>
+        <div class="process-step reveal"><span>03</span><h3>Polish</h3><p>Fine cuts, captions, sound, motion and colour.</p></div>
+        <div class="process-step reveal"><span>04</span><h3>Deliver</h3><p>Platform-ready formats and a clean final export.</p></div>
       </div>
     </section>
-
-    <section class="contact section" id="contact">
-      <p class="eyebrow reveal"><i></i> HAVE A VIDEO IDEA?</p>
-      <h2 class="reveal">LET'S MAKE<br><span class="blue">IT MOVE.</span></h2>
-      <p class="contact-desc reveal">Need a reel, product promo, cinematic edit or AI video? Let's turn your idea into something worth watching.</p>
-      <a class="button primary contact-button reveal" href="mailto:your.email@example.com">START A CONVERSATION <span>↗</span></a>
-      <div class="socials reveal"><a href="https://instagram.com/" target="_blank" rel="noreferrer">INSTAGRAM ↗</a><a href="https://wa.me/" target="_blank" rel="noreferrer">WHATSAPP ↗</a><a href="mailto:your.email@example.com">EMAIL ↗</a></div>
-      <p class="contact-note">CONTACT LINKS ARE PLACEHOLDERS — ADD YOUR OWN DETAILS BEFORE SHARING.</p>
+    <section class="contact-section section-pad" id="contact">
+      <div class="contact-orbit" aria-hidden="true"></div><div class="section-label reveal"><span>06</span> HAVE SOMETHING IN MIND?</div>
+      <div class="contact-layout">
+        <div class="contact-main reveal"><h2>Let's make<br><em>it matter.</em></h2><p>Have a video to edit, a brand to build or an idea you want to explore with AI? Tell me what you're imagining.</p><a class="button button-primary" href="https://wa.me/916001142217" target="_blank" rel="noreferrer">MESSAGE ME ON WHATSAPP <span>↗</span></a></div>
+        <div class="contact-details reveal">
+          <a class="contact-item" href="tel:+916001142217"><span>PHONE / WHATSAPP</span><strong>+91 60011 42217</strong><b>↗</b></a>
+          <a class="contact-item" href="mailto:kartikkalwadia3@gmail.com"><span>EMAIL</span><strong>kartikkalwadia3@gmail.com</strong><b>↗</b></a>
+          <div class="contact-item contact-location"><span>BASED IN</span><strong>Guwahati, India</strong><small>Available for remote projects</small></div>
+        </div>
+      </div>
     </section>
   </main>
-
-  <footer><a class="brand" href="#home"><span class="brand-mark">K<span>.</span></span><span>KARTIK <span class="muted">/ VISUALS</span></span></a><span>CREATED TO MOVE · © 2026 KARTIK KALWADIA</span><a href="#home">BACK TO TOP ↑</a></footer>
-
-  <div class="video-modal" id="videoModal" aria-hidden="true"><button class="modal-close" aria-label="Close video">×</button><div class="modal-shell"><div class="modal-header"><span id="modalProjectTitle">PROJECT PREVIEW</span><span>KK / VIDEO PORTFOLIO</span></div><div id="driveEmbed" class="drive-embed"><div class="modal-placeholder"><span>▶</span><strong>FULL VIDEO PREVIEW</strong><p>Connect the shareable Google Drive link for this project to play the full video here.</p></div></div></div></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <footer class="site-footer"><a class="wordmark" href="#top">KK<span>.</span></a><p>VIDEO EDITOR · MOTION · AI CREATIVE</p><span>© 2026 KARTIK KALWADIA</span><a href="#top">BACK TO TOP ↑</a></footer>
   <script src="script.js"></script>
 </body>
 </html>
