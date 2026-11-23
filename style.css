@@ -58,3 +58,145 @@
   .video-cover{padding:12px 10px 10px}
   .cover-main strong{font-size:21px}
 }
+
+
+/* --- Requested finishing edits: portrait framing, video cover overlays, tools card --- */
+.hero-person{
+  align-items:flex-end;
+  overflow:visible;
+}
+.person-photo{
+  height:min(540px,80vh) !important;
+  width:100%;
+  max-width:390px !important;
+  object-fit:contain !important;
+  object-position:center bottom !important;
+  transform:translate3d(0,-18px,35px) !important;
+}
+@media(max-width:680px){
+  .hero-person{height:430px !important}
+  .person-photo{
+    height:430px !important;
+    max-width:360px !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+    transform:translate3d(0,-12px,35px) !important;
+  }
+}
+/* Custom designed thumbnail sits above each native MP4 player until Play is pressed. */
+.video-frame{
+  position:relative !important;
+  isolation:isolate;
+}
+.video-frame video{
+  display:block;
+  position:relative;
+  z-index:1;
+}
+.video-frame .video-cover{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:4 !important;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:15px 14px 13px;
+  color:#fff;
+  overflow:hidden;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .28s ease,visibility .28s ease;
+}
+.video-frame .video-cover.is-hidden{
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+.video-frame .video-cover:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(180deg,rgba(7,3,15,.78),transparent 32%,transparent 58%,rgba(7,3,15,.84));
+}
+.video-frame .cafe-cover{
+  background-image:linear-gradient(135deg,rgba(28,12,40,.12),rgba(8,5,16,.08)),url("assets/images/reference-01.webp") !important;
+  background-position:center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
+.video-frame .product-cover{
+  background-image:linear-gradient(135deg,rgba(20,9,34,.12),rgba(5,4,15,.08)),url("assets/images/reference-02.webp") !important;
+  background-position:center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
+.video-frame .cover-top,.video-frame .cover-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font:7px var(--mono);
+  letter-spacing:1.1px;
+  color:#f3eaff;
+  text-shadow:0 2px 8px #000;
+}
+.video-frame .cover-top{
+  border-bottom:1px solid rgba(201,164,255,.65);
+  padding-bottom:8px;
+}
+.video-frame .cover-top span:last-child{color:#d8bdff}
+.video-frame .cover-main{
+  position:relative;
+  align-self:flex-start;
+  margin-top:auto;
+  margin-bottom:auto;
+  text-shadow:0 3px 12px #0009;
+}
+.video-frame .cover-kicker{
+  display:block;
+  font:7px var(--mono);
+  letter-spacing:1.2px;
+  color:#ecdfff;
+  margin-bottom:8px;
+}
+.video-frame .cover-main strong{
+  display:block;
+  font:800 clamp(18px,2.2vw,29px)/.94 var(--display);
+  letter-spacing:-.8px;
+}
+.video-frame .cover-main em{font-style:normal;color:#c39cff}
+.video-frame .cover-bottom{
+  border-top:1px solid rgba(201,164,255,.65);
+  padding-top:9px;
+}
+.video-frame .cover-bottom>span{font-size:6px;color:#f3eaff}
+.video-frame .cover-play{
+  width:36px;
+  height:36px;
+  flex:0 0 36px;
+  border-radius:50%;
+  border:1px solid #e2ceff;
+  background:rgba(55,26,91,.94);
+  color:white;
+  font-size:12px;
+  padding-left:3px;
+  box-shadow:0 0 18px #945be877;
+  transition:transform .2s,background .2s;
+}
+.video-frame .cover-play:hover{transform:scale(1.09);background:#834ed4}
+.offer-dark.expanded .expand-content{max-height:360px !important}
+.offer-dark .expand-content ul.tool-points{
+  padding:8px 0 0 17px;
+  color:#d8cbe8;
+  font-size:10px;
+  line-height:1.8;
+}
+.offer-dark .expand-content ul.tool-points li{margin:0 0 6px;color:#d8cbe8}
+.offer-dark .expand-content ul.tool-points strong{color:#c49eff;font-weight:600}
+@media(max-width:680px){
+  .video-frame .video-cover{padding:12px 10px 10px}
+  .video-frame .cover-main strong{font-size:21px}
+  .offer-dark.expanded .expand-content{max-height:420px !important}
+}
