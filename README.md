@@ -1,28 +1,19 @@
 # Kartik Kalwadia — 3D Video Editor Portfolio
 
-A responsive dark black-and-blue video editing portfolio built with HTML, CSS and vanilla JavaScript.
+A portrait-led, animated black-and-blue portfolio with a Three.js hero scene, two featured reference projects, editing services, software toolbox, AI-video/prompting section and responsive layout.
 
-## Add your videos
-Upload MP4 files to `assets/videos/` using these names:
-- `project-01.mp4` through `project-06.mp4`
-- `showreel.mp4`
+## Featured reference videos
+The two supplied reference clips are represented by visual thumbnails:
+- Project 01 — Atmosphere in Motion (15.9 seconds)
+- Project 02 — Product, Elevated (39.9 seconds)
 
-Each project tile opens a preview player. The showreel button opens `showreel.mp4`.
+To enable full playback inside the project modal, share each clip from Google Drive using **Anyone with the link → Viewer**, then provide both links so they can be added to `script.js`.
 
-## Personalize contact links
-Edit `index.html` and replace the sample email, Instagram and WhatsApp links with your actual details. Also update project names, categories, About text and skills.
+## Add more projects
+Add a poster image to `assets/images/`, add the MP4 to a video host, then add a project card and its shareable preview URL to `index.html` and `script.js`.
 
-## Enable GitHub Pages
-1. Open repository **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-3. Save the setting, if prompted.
-4. Open the **Actions** tab and re-run the latest **Deploy portfolio to GitHub Pages** workflow if it does not start automatically.
-5. After the deployment succeeds, your site will be available at https://kartikkalwadia.github.io/kartik-portfolio/.
+## Personalize contact
+In `index.html`, replace `your.email@example.com`, the Instagram URL and the WhatsApp URL with your actual contact details.
 
-A workflow is included at `.github/workflows/pages.yml` to publish the site whenever new commits are pushed to `main`.
-
-## Notes
-- This is a static HTML/CSS/JavaScript site; no paid hosting or build step is required.
-- The animated 3D hero artwork is CSS-based.
-- Google Fonts load from Google Fonts; system fallbacks are included.
-- The six project cards are placeholders until you upload your own MP4 clips.
+## GitHub Pages
+Repository → Settings → Pages → Build and deployment → Source → GitHub Actions. The workflow in `.github/workflows/pages.yml` publishes each push to `main`.
