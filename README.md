@@ -1,14 +1,16 @@
 # Kartik Kalwadia — Video Editor & AI Creative Portfolio
 
-A premium dark editorial portfolio with a restrained 3D perspective grid, animated scan detail, a prominent profile portrait, two directly embedded MP4 samples, services, toolkit and contact links.
+A premium dark editorial portfolio with a restrained 3D perspective grid, animated scan detail, a prominent profile portrait, two selected video projects, services, software toolkit and contact links.
 
-## Featured videos
-Both video files are stored in the repository and play directly in the page using native HTML video controls. No Google Drive links are used.
+## Add the two selected MP4 videos
+The portfolio's built-in HTML players are configured to use these exact paths:
 
-- `assets/videos/project-01-cinematic.mp4` — cinematic / hospitality reference edit.
-- `assets/videos/project-02-product.mp4` — product / promotional reference edit.
+- `assets/videos/project-01-cinematic.mp4`
+- `assets/videos/project-02-product.mp4`
 
-The source videos were optimized for fast web playback. The two projects are deliberately presented as a curated selection rather than an exhaustive archive. Keep both MP4 files in `assets/videos/` when deploying; the players reference these repository paths directly.
+The videos have been optimized for web playback and are available in the supplied `kartik-premium-video-files.zip` package. Upload both MP4 files into the repository's existing `assets/videos/` folder using **Add file → Upload files**, then commit them to `main`. Once those two files are present, they play directly on the page. No Google Drive links are used.
+
+The two projects are deliberately presented as a curated selection rather than an exhaustive archive.
 
 ## Personal details
 Phone / WhatsApp: +91 60011 42217  
