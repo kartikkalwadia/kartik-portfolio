@@ -19,3 +19,49 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   video.addEventListener('play',()=>cover.classList.add('is-hidden'));
   video.addEventListener('ended',()=>cover.classList.remove('is-hidden'));
 });
+
+
+/* Swipeable project carousel with accessible pagination dots. */
+(function projectCarousel(){
+  const track=document.querySelector('.project-grid');
+  if(!track)return;
+  const cards=Array.from(track.querySelectorAll(':scope > .project-card'));
+  if(cards.length<2)return;
+  track.setAttribute('role','region');
+  track.setAttribute('aria-label','Selected video projects carousel');
+  track.setAttribute('tabindex','0');
+  const dotsWrap=document.createElement('div');
+  dotsWrap.className='project-slider-dots';
+  dotsWrap.setAttribute('aria-label','Project carousel pagination');
+  track.insertAdjacentElement('afterend',dotsWrap);
+  let dots=[];
+  function stepSize(){const first=cards[0];const gap=parseFloat(getComputedStyle(track).gap)||0;return first.getBoundingClientRect().width+gap;}
+  function pageCount(){const max=Math.max(0,track.scrollWidth-track.clientWidth);return Math.max(1,Math.ceil(max/stepSize())+1);}
+  function buildDots(){
+    const count=pageCount();
+    dotsWrap.replaceChildren();
+    dots=Array.from({length:count},(_,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','Show project slide '+(i+1));
+      b.addEventListener('click',()=>track.scrollTo({left:Math.min(i*stepSize(),track.scrollWidth-track.clientWidth),behavior:'smooth'}));
+      dotsWrap.appendChild(b);
+      return b;
+    });
+    updateDots();
+  }
+  function updateDots(){
+    if(!dots.length)return;
+    const idx=Math.min(dots.length-1,Math.round(track.scrollLeft/stepSize()));
+    dots.forEach((d,i)=>d.setAttribute('aria-current',String(i===idx)));
+  }
+  let scrollTimer;
+  track.addEventListener('scroll',()=>{if(scrollTimer)clearTimeout(scrollTimer);scrollTimer=setTimeout(updateDots,45)},{passive:true});
+  track.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();track.scrollBy({left:stepSize(),behavior:'smooth'});}
+    if(e.key==='ArrowLeft'){e.preventDefault();track.scrollBy({left:-stepSize(),behavior:'smooth'});}
+  });
+  if('ResizeObserver' in window)new ResizeObserver(buildDots).observe(track);
+  else window.addEventListener('resize',buildDots);
+  buildDots();
+})();
