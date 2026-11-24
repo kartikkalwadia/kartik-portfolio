@@ -385,3 +385,17 @@
     max-height:none !important;
   }
 }
+
+
+/* HOME HERO ONLY: remove the portrait arch/frame and orbit rings.
+   Keep the purple aura, portrait, text, buttons and About section unchanged. */
+.hero-person > .person-ring,
+.hero-person > .ring-one,
+.hero-person > .ring-two {
+  display: none !important;
+}
+.hero-person > .person-photo {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
