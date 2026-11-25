@@ -402,7 +402,7 @@
 
 /* Project 02: balcony inspiration cover, keeping the same card/video frame */
 .project-grid>.project-card:nth-child(2) .video-frame .product-cover{
-  background-image:linear-gradient(145deg,rgba(14,7,28,.35),rgba(5,3,12,.94)),radial-gradient(ellipse at 75% 20%,rgba(154,101,245,.48),transparent 48%),linear-gradient(135deg,#25143b,#08060f) !important;
+  background-image:linear-gradient(145deg,rgba(14,7,28,.22),rgba(5,3,12,.42)),url("assets/images/video%202%20%20thumbnail.png") !important;
   background-position:center !important;background-size:cover !important;background-repeat:no-repeat !important;
 }
 
