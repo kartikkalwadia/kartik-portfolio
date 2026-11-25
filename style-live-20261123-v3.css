@@ -405,3 +405,22 @@
   background-image:linear-gradient(145deg,rgba(14,7,28,.35),rgba(5,3,12,.94)),radial-gradient(ellipse at 75% 20%,rgba(154,101,245,.48),transparent 48%),linear-gradient(135deg,#25143b,#08060f) !important;
   background-position:center !important;background-size:cover !important;background-repeat:no-repeat !important;
 }
+
+
+/* Small fixed background-music control, tucked into the lower-right corner. */
+.background-music-toggle{
+  position:fixed;right:20px;bottom:18px;z-index:120;
+  display:flex;align-items:center;gap:8px;
+  padding:9px 13px;border-radius:999px;
+  border:1px solid rgba(190,151,255,.52);
+  background:rgba(15,9,27,.88);backdrop-filter:blur(12px);
+  color:#e9dcff;font:9px var(--mono);letter-spacing:.7px;
+  box-shadow:0 5px 22px rgba(0,0,0,.38),0 0 16px rgba(141,83,222,.16);
+  cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.background-music-toggle:hover,.background-music-toggle.is-playing{
+  background:linear-gradient(135deg,rgba(101,57,167,.94),rgba(35,18,58,.96));
+  border-color:#c6a2ff;box-shadow:0 0 20px rgba(146,91,231,.36);
+}
+.background-music-toggle:focus-visible{outline:2px solid #d7bdff;outline-offset:3px}
+@media(max-width:680px){.background-music-toggle{right:12px;bottom:12px;padding:8px 11px;font-size:8px}}
