@@ -67,8 +67,8 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
 })();
 
 
-/* Soft looping portfolio background music (11% volume).
-   Keep retrying after rejected autoplay until a real user gesture succeeds (mobile Safari/Chrome). */
+/* Background music: pause while any portfolio video plays, then resume
+   only if the visitor had music enabled. */
 (function backgroundMusic(){
   const toggle=document.getElementById('backgroundMusicToggle');
   if(!toggle)return;
@@ -76,7 +76,11 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   audio.loop=true;
   audio.preload='auto';
   audio.volume=0.11;
-  let enabled=false,starting=false;
+
+  let enabled=false;
+  let starting=false;
+  const playingVideos=new Set();
+
   function updateButton(){
     toggle.setAttribute('aria-pressed',String(enabled));
     toggle.setAttribute('aria-label',enabled?'Turn background music off':'Turn background music on');
@@ -84,43 +88,47 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
     if(label)label.textContent=enabled?'Music: On':'Music: Off';
     toggle.classList.toggle('is-playing',enabled);
   }
-  function removeGestureListeners(){
-    document.removeEventListener('pointerdown',firstInteraction);
-    document.removeEventListener('touchend',firstInteraction);
-    document.removeEventListener('click',firstInteraction);
-    document.removeEventListener('keydown',firstInteraction);
-  }
-  async function startMusic(){
-    if(enabled||starting)return;
+
+  async function playAudioIfAllowed(){
+    if(!enabled||playingVideos.size||!audio.paused||starting)return;
     starting=true;
     try{
-      const playRequest=audio.play();
-      if(playRequest&&typeof playRequest.then==='function')await playRequest;
-      enabled=true;
-      updateButton();
-      removeGestureListeners();
+      const request=audio.play();
+      if(request&&typeof request.then==='function')await request;
     }catch(error){
-      enabled=false;
-      updateButton();
-      /* Do not remove gesture listeners: mobile browsers may reject the first attempt. */
+      /* A browser may block playback until the next user gesture. */
     }finally{starting=false;}
   }
-  function firstInteraction(event){
-    /* The button handles its own click to avoid toggling ON then immediately OFF. */
-    if(event&&event.target&&toggle.contains(event.target))return;
-    startMusic();
+
+  function videoStarted(video){
+    playingVideos.add(video);
+    if(!audio.paused)audio.pause();
   }
-  toggle.addEventListener('click',()=>{
-    if(enabled){audio.pause();enabled=false;updateButton();}
-    else startMusic();
+
+  function videoStopped(video){
+    playingVideos.delete(video);
+    if(playingVideos.size===0)playAudioIfAllowed();
+  }
+
+  document.querySelectorAll('.video-frame video').forEach(video=>{
+    video.addEventListener('play',()=>videoStarted(video));
+    video.addEventListener('pause',()=>videoStopped(video));
+    video.addEventListener('ended',()=>videoStopped(video));
   });
-  audio.addEventListener('pause',()=>{if(enabled){enabled=false;updateButton();}});
-  audio.addEventListener('ended',()=>{if(enabled)startMusic();});
-  /* Autoplay may be blocked; retry from actual taps/clicks until playback succeeds. */
-  document.addEventListener('pointerdown',firstInteraction,{passive:true});
-  document.addEventListener('touchend',firstInteraction,{passive:true});
-  document.addEventListener('click',firstInteraction);
-  document.addEventListener('keydown',firstInteraction);
-  startMusic();
+
+  toggle.addEventListener('click',async()=>{
+    if(enabled){
+      enabled=false;
+      audio.pause();
+      updateButton();
+      return;
+    }
+    enabled=true;
+    updateButton();
+    await playAudioIfAllowed();
+  });
+
+  /* Start attempt; browser policy may require the visitor to tap Music. */
+  playAudioIfAllowed();
   updateButton();
 })();
