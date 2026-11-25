@@ -67,7 +67,8 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
 })();
 
 
-/* Soft looping portfolio background music (11% volume). Browsers may require a user gesture. */
+/* Soft looping portfolio background music (11% volume).
+   Keep retrying after rejected autoplay until a real user gesture succeeds (mobile Safari/Chrome). */
 (function backgroundMusic(){
   const toggle=document.getElementById('backgroundMusicToggle');
   if(!toggle)return;
@@ -75,7 +76,7 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   audio.loop=true;
   audio.preload='auto';
   audio.volume=0.11;
-  let enabled=false;
+  let enabled=false,starting=false;
   function updateButton(){
     toggle.setAttribute('aria-pressed',String(enabled));
     toggle.setAttribute('aria-label',enabled?'Turn background music off':'Turn background music on');
@@ -83,9 +84,31 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
     if(label)label.textContent=enabled?'Music: On':'Music: Off';
     toggle.classList.toggle('is-playing',enabled);
   }
+  function removeGestureListeners(){
+    document.removeEventListener('pointerdown',firstInteraction);
+    document.removeEventListener('touchend',firstInteraction);
+    document.removeEventListener('click',firstInteraction);
+    document.removeEventListener('keydown',firstInteraction);
+  }
   async function startMusic(){
-    try{await audio.play();enabled=true;updateButton();}
-    catch(error){enabled=false;updateButton();}
+    if(enabled||starting)return;
+    starting=true;
+    try{
+      const playRequest=audio.play();
+      if(playRequest&&typeof playRequest.then==='function')await playRequest;
+      enabled=true;
+      updateButton();
+      removeGestureListeners();
+    }catch(error){
+      enabled=false;
+      updateButton();
+      /* Do not remove gesture listeners: mobile browsers may reject the first attempt. */
+    }finally{starting=false;}
+  }
+  function firstInteraction(event){
+    /* The button handles its own click to avoid toggling ON then immediately OFF. */
+    if(event&&event.target&&toggle.contains(event.target))return;
+    startMusic();
   }
   toggle.addEventListener('click',()=>{
     if(enabled){audio.pause();enabled=false;updateButton();}
@@ -93,14 +116,11 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   });
   audio.addEventListener('pause',()=>{if(enabled){enabled=false;updateButton();}});
   audio.addEventListener('ended',()=>{if(enabled)startMusic();});
-  /* Attempt autoplay; if blocked, begin quietly after the visitor's first page interaction. */
+  /* Autoplay may be blocked; retry from actual taps/clicks until playback succeeds. */
+  document.addEventListener('pointerdown',firstInteraction,{passive:true});
+  document.addEventListener('touchend',firstInteraction,{passive:true});
+  document.addEventListener('click',firstInteraction);
+  document.addEventListener('keydown',firstInteraction);
   startMusic();
-  const firstInteraction=(event)=>{
-    /* Let the music button's own click handler decide ON/OFF without a double toggle. */
-    if(event&&event.target&&toggle.contains(event.target))return;
-    if(!enabled)startMusic();
-  };
-  document.addEventListener('pointerdown',firstInteraction,{once:true,passive:true});
-  document.addEventListener('keydown',firstInteraction,{once:true});
   updateButton();
 })();
