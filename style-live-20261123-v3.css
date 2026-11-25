@@ -26,8 +26,8 @@
   url("assets/images/poster-cinematic-final.webp") center/cover no-repeat;
 }
 .product-cover{
-  background:linear-gradient(135deg,rgba(20,9,34,.14),rgba(5,4,15,.08)),
-  url("assets/images/poster-product-final.webp") center/cover no-repeat;
+  background:linear-gradient(135deg,rgba(20,9,34,.08),rgba(5,4,15,.05)),
+  url("assets/images/video%202%20%20thumbnail.png") center/cover no-repeat;
 }
 .cover-top,.cover-bottom{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
