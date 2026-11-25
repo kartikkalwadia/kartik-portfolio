@@ -95,7 +95,11 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   audio.addEventListener('ended',()=>{if(enabled)startMusic();});
   /* Attempt autoplay; if blocked, begin quietly after the visitor's first page interaction. */
   startMusic();
-  const firstInteraction=()=>{if(!enabled)startMusic();};
+  const firstInteraction=(event)=>{
+    /* Let the music button's own click handler decide ON/OFF without a double toggle. */
+    if(event&&event.target&&toggle.contains(event.target))return;
+    if(!enabled)startMusic();
+  };
   document.addEventListener('pointerdown',firstInteraction,{once:true,passive:true});
   document.addEventListener('keydown',firstInteraction,{once:true});
   updateButton();
