@@ -65,3 +65,38 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   else window.addEventListener('resize',buildDots);
   buildDots();
 })();
+
+
+/* Soft looping portfolio background music (11% volume). Browsers may require a user gesture. */
+(function backgroundMusic(){
+  const toggle=document.getElementById('backgroundMusicToggle');
+  if(!toggle)return;
+  const audio=new Audio('assets/song%20websit.mp3');
+  audio.loop=true;
+  audio.preload='auto';
+  audio.volume=0.11;
+  let enabled=false;
+  function updateButton(){
+    toggle.setAttribute('aria-pressed',String(enabled));
+    toggle.setAttribute('aria-label',enabled?'Turn background music off':'Turn background music on');
+    const label=toggle.querySelector('span');
+    if(label)label.textContent=enabled?'Music: On':'Music: Off';
+    toggle.classList.toggle('is-playing',enabled);
+  }
+  async function startMusic(){
+    try{await audio.play();enabled=true;updateButton();}
+    catch(error){enabled=false;updateButton();}
+  }
+  toggle.addEventListener('click',()=>{
+    if(enabled){audio.pause();enabled=false;updateButton();}
+    else startMusic();
+  });
+  audio.addEventListener('pause',()=>{if(enabled){enabled=false;updateButton();}});
+  audio.addEventListener('ended',()=>{if(enabled)startMusic();});
+  /* Attempt autoplay; if blocked, begin quietly after the visitor's first page interaction. */
+  startMusic();
+  const firstInteraction=()=>{if(!enabled)startMusic();};
+  document.addEventListener('pointerdown',firstInteraction,{once:true,passive:true});
+  document.addEventListener('keydown',firstInteraction,{once:true});
+  updateButton();
+})();
