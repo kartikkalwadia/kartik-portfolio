@@ -67,8 +67,8 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
 })();
 
 
-/* Background music: pause while any portfolio video plays, then resume
-   only if the visitor had music enabled. */
+/* Background music: start on ordinary visitor interaction, pause while
+   any project video plays, then resume after all videos pause/end. */
 (function backgroundMusic(){
   const toggle=document.getElementById('backgroundMusicToggle');
   if(!toggle)return;
@@ -96,8 +96,16 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
       const request=audio.play();
       if(request&&typeof request.then==='function')await request;
     }catch(error){
-      /* A browser may block playback until the next user gesture. */
+      /* Retry on the next user gesture if browser autoplay is blocked. */
     }finally{starting=false;}
+  }
+
+  function enableFromInteraction(){
+    if(!enabled){
+      enabled=true;
+      updateButton();
+    }
+    playAudioIfAllowed();
   }
 
   function videoStarted(video){
@@ -116,19 +124,29 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
     video.addEventListener('ended',()=>videoStopped(video));
   });
 
-  toggle.addEventListener('click',async()=>{
+  toggle.addEventListener('click',()=>{
     if(enabled){
       enabled=false;
       audio.pause();
       updateButton();
       return;
     }
-    enabled=true;
-    updateButton();
-    await playAudioIfAllowed();
+    enableFromInteraction();
   });
 
-  /* Start attempt; browser policy may require the visitor to tap Music. */
-  playAudioIfAllowed();
+  /* A click/tap anywhere else, or a touch that begins scrolling, starts
+     music again. Do not override an explicit OFF click on the Music button. */
+  document.addEventListener('pointerdown',event=>{
+    if(event.target.closest('#backgroundMusicToggle'))return;
+    enableFromInteraction();
+  },{passive:true});
+
+  document.addEventListener('click',event=>{
+    if(event.target.closest('#backgroundMusicToggle'))return;
+    enableFromInteraction();
+  },{passive:true});
+
+  /* Keep the original load-time autoplay attempt; browsers may block it. */
+  enableFromInteraction();
   updateButton();
 })();
