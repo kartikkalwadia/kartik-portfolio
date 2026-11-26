@@ -67,8 +67,9 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
 })();
 
 
-/* Background music: start on ordinary visitor interaction, pause while
-   any project video plays, then resume after all videos pause/end. */
+/* Background music: preserve visitor's explicit OFF choice.
+   On mobile, scrolling/tapping elsewhere must not re-enable music after OFF.
+   Project videos pause the song and resume it only when music remains enabled. */
 (function backgroundMusic(){
   const toggle=document.getElementById('backgroundMusicToggle');
   if(!toggle)return;
@@ -77,7 +78,9 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   audio.preload='auto';
   audio.volume=0.11;
 
+  const isMobile=window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   let enabled=false;
+  let manuallyOff=false;
   let starting=false;
   const playingVideos=new Set();
 
@@ -90,17 +93,18 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   }
 
   async function playAudioIfAllowed(){
-    if(!enabled||playingVideos.size||!audio.paused||starting)return;
+    if(!enabled||manuallyOff||playingVideos.size||!audio.paused||starting)return;
     starting=true;
     try{
       const request=audio.play();
       if(request&&typeof request.then==='function')await request;
     }catch(error){
-      /* Retry on the next user gesture if browser autoplay is blocked. */
+      /* Mobile browsers may require a direct tap on the Music control. */
     }finally{starting=false;}
   }
 
   function enableFromInteraction(){
+    if(manuallyOff)return;
     if(!enabled){
       enabled=true;
       updateButton();
@@ -127,26 +131,34 @@ document.querySelectorAll('.video-frame').forEach(frame=>{
   toggle.addEventListener('click',()=>{
     if(enabled){
       enabled=false;
+      manuallyOff=true;
       audio.pause();
       updateButton();
       return;
     }
-    enableFromInteraction();
+    manuallyOff=false;
+    enabled=true;
+    updateButton();
+    playAudioIfAllowed();
   });
 
-  /* A click/tap anywhere else, or a touch that begins scrolling, starts
-     music again. Do not override an explicit OFF click on the Music button. */
+  /* Keep the original interaction-to-play behavior on desktop.
+     On mobile, tap/scroll can start music only until the visitor explicitly
+     switches it OFF; that OFF choice persists until Music is tapped ON. */
   document.addEventListener('pointerdown',event=>{
     if(event.target.closest('#backgroundMusicToggle'))return;
+    if(isMobile&&manuallyOff)return;
     enableFromInteraction();
   },{passive:true});
 
   document.addEventListener('click',event=>{
     if(event.target.closest('#backgroundMusicToggle'))return;
+    if(isMobile&&manuallyOff)return;
     enableFromInteraction();
   },{passive:true});
 
-  /* Keep the original load-time autoplay attempt; browsers may block it. */
-  enableFromInteraction();
+  /* Preserve the existing initial playback attempt. */
+  if(!isMobile)enableFromInteraction();
+  else playAudioIfAllowed();
   updateButton();
 })();
